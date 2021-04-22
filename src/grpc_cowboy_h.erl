@@ -166,7 +166,10 @@ headers(St) ->
                       Meta#{<<"grpc-encoding">> => <<"gzip">>};
                   _ -> Meta
               end,
-    grpc_lib:maybe_encode_headers(Headers).
+    NHeaders = Headers#{
+                 <<"content-type">> => <<"application/grpc">>
+                },
+    grpc_lib:maybe_encode_headers(NHeaders).
 
 %% Ret :: {shutdown, Code, Message}
 %%      | {ok, NEvents, NSt}
